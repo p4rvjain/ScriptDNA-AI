@@ -137,4 +137,4 @@ API deployment
 
 Parv Jain, Nikshit, Vriti Chaturvedi
 
-Built for hackathon by Rnadomize();
+Built for hackathon by Randomize();
