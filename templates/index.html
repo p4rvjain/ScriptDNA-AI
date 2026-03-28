@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ScriptDNA AI</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="glass">
+<h1>🧬 ScriptDNA AI</h1>
+
+<textarea id="textInput" placeholder="Paste text here..."></textarea>
+<input type="file" id="fileInput">
+
+<button onclick="analyze()">Analyze</button>
+<button onclick="humanize()">Humanize ✍️</button>
+
+<h2 id="score"></h2>
+
+<div id="output"></div>
+<div id="suggestions"></div>
+
+<h3>Rewritten Text</h3>
+<div id="rewriteBox"></div>
+
+</div>
+
+<script>
+async function analyze() {
+    let text = document.getElementById("textInput").value;
+    let file = document.getElementById("fileInput").files[0];
+
+    let res;
+
+    if (file) {
+        let formData = new FormData();
+        formData.append("file", file);
+
+        res = await fetch("/ocr", { method: "POST", body: formData });
+
+    } else if (text) {
+
+        res = await fetch("/detect", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({text: text})
+        });
+
+    } else {
+        alert("Enter text or upload image");
+        return;
+    }
+
+    let data = await res.json();
+    displayResult(data);
+}
+
+function displayResult(data) {
+    document.getElementById("score").innerText =
+        "AI Probability: " + data.overall_score + "%";
+
+    let output = "";
+
+    data.sentences.forEach(s => {
+        let bg = s.label === "AI" ? "#ff4d4d33" :
+                 s.label === "Mixed" ? "#ffaa0033" : "#00ff9933";
+
+        output += `<p class="highlight" style="background:${bg}">
+            ${s.sentence} (${s.score}%)
+        </p>`;
+    });
+
+    document.getElementById("output").innerHTML = output;
+
+    let sug = "<h3>Suggestions</h3>";
+    data.suggestions.forEach(s => {
+        sug += `<p>💡 ${s}</p>`;
+    });
+
+    document.getElementById("suggestions").innerHTML = sug;
+}
+
+async function humanize() {
+    let text = document.getElementById("textInput").value;
+
+    if (!text) {
+        alert("Enter text first!");
+        return;
+    }
+
+    let res = await fetch("/humanize", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({text: text})
+    });
+
+    let data = await res.json();
+
+    document.getElementById("rewriteBox").innerText = data.humanized_text;
+}
+</script>
+
+</body>
+</html>

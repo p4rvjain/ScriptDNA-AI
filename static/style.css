@@ -1,0 +1,64 @@
+body {
+    background: linear-gradient(135deg, #020617, #0f172a);
+    color: white;
+    font-family: 'Segoe UI';
+}
+
+.glass {
+    width: 55%;
+    margin: auto;
+    margin-top: 60px;
+    padding: 30px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 40px rgba(0,255,255,0.2);
+}
+
+.login-box {
+    width: 30%;
+    text-align: center;
+}
+
+input, textarea {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    border-radius: 8px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 12px;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(45deg, #00f5a0, #00d9f5);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.highlight {
+    padding: 10px;
+    border-radius: 8px;
+    margin: 5px 0;
+}
+
+#rewriteBox {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+}
+
+.hint {
+    font-size: 12px;
+    color: gray;
+}
