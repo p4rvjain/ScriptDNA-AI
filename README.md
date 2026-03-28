@@ -61,7 +61,7 @@ scriptdna-ai/
 
 Ensure Python is installed on your system.
 
-Install required dependencies:
+Install requirements:
 
 pip install flask transformers torch pytesseract opencv-python nltk pillow
 
