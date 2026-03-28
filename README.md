@@ -135,6 +135,6 @@ API deployment
 
 ## Authors
 
-Parv Jain, Nikshit, Vriti Chaturvedi
+Parv Jain, Nikshit Goyal, Vriti Chaturvedi
 
 Built for hackathon by Randomize();
